@@ -1,0 +1,19 @@
+{
+  "name": "logic-sim-desktop",
+  "version": "1.0.0",
+  "description": "desktop version on logic circuit simulator app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mattellis91/logic-sim-desktop.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mattellis91/logic-sim-desktop/issues"
+  },
+  "homepage": "https://github.com/mattellis91/logic-sim-desktop#readme"
+}
