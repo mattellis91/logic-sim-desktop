@@ -1,4 +1,4 @@
-@import url(c:\Users\matty\Documents\AWS\logic-curcuit-simulator\node_modules\drawflow\dist\drawflow.min.css);
+@import url(../../node_modules/drawflow/dist/drawflow.min.css);
 @import url(c:\Users\matty\Documents\AWS\logic-curcuit-simulator\node_modules\@fortawesome\fontawesome-free\css\all.min.css);
 
 
@@ -494,3 +494,28 @@ btn-lock {
     width: 80%;
   }
 }
+
+.dock {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  color:white;
+  height: 50px;
+  left: 20%;
+  bottom: 20px;
+  border-radius: 15px;
+  background-color: black;
+  min-width: 100px;
+}
+
+.dock .dock-element {
+  width: 50px;
+  text-align: center;
+  border-right: 1px solid #eeee;
+  font-size: 20px;
+  padding: 15px;
+  &:hover {
+      cursor: pointer;
+  }
+}
+

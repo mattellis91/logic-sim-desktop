@@ -1,5 +1,5 @@
 export default function Dock() {
     return (
-        <div></div>
+        <div className="dock"></div>
     )
 }
