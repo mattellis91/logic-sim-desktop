@@ -6,7 +6,8 @@ import cuid from "cuid";
 
 export default function Editor() {
 
-    let nodeSelected = null;
+    let selectedNode:any = null;
+    const nodeMap:Record<string, string | number> = {}
 
     useEffect(() => {
         const id = document.getElementById('drawflow');
@@ -20,7 +21,7 @@ export default function Editor() {
         editor.reroute_curvature_start_end = 0;
         editor.reroute_curvature = 0;
 
-        editor.createCurvature = function(
+        (editor as any).createCurvature = function(
             start_pos_x:number, 
             start_pos_y:number, 
             end_pos_x:number, end_pos_y:number, 
@@ -31,16 +32,30 @@ export default function Editor() {
 
         editor.on('nodeMoved', function(id) {
             console.log(id);
-        })
+        });
 
         editor.on('nodeSelected', function(id) {
             console.log(id);
-        })
+        });
+
+        editor.on('click', function(e) {
+            console.log(e);
+            if(e.target && (e.target as HTMLElement).getAttribute('data-component-id') && !selectedNode) {
+                const dataComponentId = (e.target as HTMLElement).getAttribute('data-component-id');
+                console.log("ASDASDASD");
+                console.log(dataComponentId);
+                selectedNode = editor.getNodeFromId(nodeMap[dataComponentId as string]);
+                selectedNode.pos_x = 500;
+                editor.updateConnectionNodes(selectedNode.id);
+            }           
+        });
         
         editor.start();
 
-        const notGate = new EditorComponentNotGate();
-        editor.addNode('not-'+cuid(), notGate.inputs, notGate.outputs, 100, 100, notGate.className, notGate.data, notGate.html, false);
+        const componentId = 'not-'+cuid();
+        const notGate = new EditorComponentNotGate(componentId);
+        nodeMap[componentId] = editor.addNode(componentId, notGate.inputs, notGate.outputs, 100, 100, notGate.className, notGate.data, notGate.html, false);
+        console.log(nodeMap);
     });
     
 

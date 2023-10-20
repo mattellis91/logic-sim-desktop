@@ -1,5 +1,5 @@
 @import url(../../node_modules/drawflow/dist/drawflow.min.css);
-@import url(c:\Users\matty\Documents\AWS\logic-curcuit-simulator\node_modules\@fortawesome\fontawesome-free\css\all.min.css);
+@import url(../../node_modules/@fortawesome/fontawesome-free/css/all.min.css);
 
 
 #root, #drawflow-wrapper {
