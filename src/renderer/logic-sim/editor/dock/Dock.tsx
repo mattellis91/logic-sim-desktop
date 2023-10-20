@@ -1,4 +1,13 @@
-export default function Dock() {
+import Drawflow from "drawflow";
+import { useState } from "react";
+
+type DockProps = {
+    editor: Drawflow | undefined;
+}
+
+export default function Dock({ editor }: DockProps) {
+
+    const [draggedItem, setDraggedItem] = useState<HTMLElement | null>(null);
     
     const dockItems = [
         {
@@ -86,12 +95,50 @@ export default function Dock() {
             draggable: true,
         },
     ]
+
+    function handleDrop(e:any) {
+        e.stopPropagation();
+        e.preventDefault();
+    }
+
+    function handleDragOver(e:any) {
+        e.stopPropagation();
+        e.preventDefault();
+    }
+
+    function handleDragLeave(e:any) {
+        e.stopPropagation();
+        e.preventDefault();
+        console.log(e);
+        setDraggedItem(e.target);
+    }
+
+    function handleDragEnter(e:any) {
+        e.stopPropagation();
+        e.preventDefault();
+    }
+
+    function handleDragEnd(e:any) {
+        e.stopPropagation();
+        e.preventDefault();
+        console.log(e);
+        if (draggedItem !== null) {
+            console.log('draggedItem dropped')
+            console.log(draggedItem);
+        }
+    }
     
     return (
         <div className="dock">
             {dockItems.map((item) => {
                 return (
-                    <div className="dock-element" key={item.id} draggable={item.draggable} data-component-id={item.type}>
+                    <div className="dock-element" key={item.id} draggable={item.draggable} data-component-id={item.type} 
+                        onDrop={e => handleDrop(e) }
+                        onDragOver={e => handleDragOver(e) }
+                        onDragLeave={e => handleDragLeave(e) }
+                        onDragEnter={e => handleDragEnter(e) }
+                        onDragEnd={e => handleDragEnd(e) } 
+                    >
                         {item.content.startsWith('fas') ? <i className={item.content}></i> : <span>{item.content}</span>}
                     </div>
                 )

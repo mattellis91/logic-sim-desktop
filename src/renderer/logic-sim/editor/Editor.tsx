@@ -1,17 +1,29 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Dock from "./dock/Dock";
 import { LogicSim } from "./logic-sim";
+import Drawflow from "drawflow";
+import SlidingPanel from "react-sliding-side-panel";
 
 export default function Editor() {
 
+    const [editor, setEditor] = useState<Drawflow>();
+    const [openPanel, setOpenPanel] = useState<boolean>(false);
+
     useEffect(() => {
-        new LogicSim('drawflow');
-    });
+        setEditor(new LogicSim('drawflow').getEditor());
+    }, []);
     
     return (
         <div id="drawflow-wrapper">
+            <button onClick={() => setOpenPanel(true)}>Open</button>
             <div id="drawflow" />
-            <Dock />
+            <Dock editor={editor} />
+            <SlidingPanel type={'right'} isOpen={openPanel} size={20}>
+                <div>
+                    <div>Panel Test</div>
+                    <button onClick={() => setOpenPanel(false)}>Close</button>
+                </div>
+            </SlidingPanel>
         </div>
     )
 }

@@ -59,4 +59,8 @@ export class LogicSim {
         this.nodeMap[componentId] = this.editor.addNode(componentId, notGate.inputs, notGate.outputs, 100, 100, notGate.className, notGate.data, notGate.html, false);
         console.log(this.nodeMap);
     }
+
+    getEditor() {
+        return this.editor;
+    }
 }
