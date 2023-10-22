@@ -63,4 +63,18 @@ export class LogicSim {
     getEditor() {
         return this.editor;
     }
+
+    addComponent(name:string, pos_x:number, pos_y:number): boolean {
+
+        if (this.editor.editor_mode === 'fixed') {
+            return false;
+        }
+        pos_x = pos_x * (this.editor.precanvas.clientWidth / (this.editor.precanvas.clientWidth * this.editor.zoom)) - (this.editor.precanvas.getBoundingClientRect().x * (this.editor.precanvas.clientWidth / (this.editor.precanvas.clientWidth * this.editor.zoom)));
+        pos_y = pos_y * (this.editor.precanvas.clientHeight / (this.editor.precanvas.clientHeight * this.editor.zoom)) - (this.editor.precanvas.getBoundingClientRect().y * (this.editor.precanvas.clientHeight / (this.editor.precanvas.clientHeight * this.editor.zoom)));
+  
+        switch(name) {
+            case 'input-component-on':
+        }
+        return false;
+    }
 }
