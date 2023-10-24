@@ -32,25 +32,25 @@ export class LogicSim {
             return ' M ' + start_pos_x + ' ' + start_pos_y + ' L '+ center_x +' ' +  start_pos_y  + ' L ' + center_x + ' ' +  end_pos_y  + ' L ' + end_pos_x + ' ' + end_pos_y;
         }
 
-        this.editor.on('nodeMoved', function(id) {
+        this.editor.on('nodeMoved', function(id:string) {
             console.log(id);
         });
 
-        this.editor.on('nodeSelected', function(id) {
-            console.log(id);
-        });
+        // this.editor.on('nodeSelected', function(id:string) {
+        //     console.log(id);
+        // });
 
-        this.editor.on('click', (e) => {
-            console.log(e);
-            if(e.target && (e.target as HTMLElement).getAttribute('data-component-id') && !this.selectedNode) {
-                const dataComponentId = (e.target as HTMLElement).getAttribute('data-component-id');
-                console.log("ASDASDASD");
-                console.log(dataComponentId);
-                this.selectedNode = this.editor.getNodeFromId(this.nodeMap[dataComponentId as string]);
-                this.selectedNode.pos_x = 500;
-                this.editor.updateConnectionNodes(this.selectedNode.id);
-            }           
-        });
+        // this.editor.on('click', (e:Event) => {
+        //     console.log(e);
+        //     if(e.target && (e.target as HTMLElement).getAttribute('data-component-id') && !this.selectedNode) {
+        //         const dataComponentId = (e.target as HTMLElement).getAttribute('data-component-id');
+        //         console.log("ASDASDASD");
+        //         console.log(dataComponentId);
+        //         this.selectedNode = this.editor.getNodeFromId(this.nodeMap[dataComponentId as string]);
+        //         this.selectedNode.pos_x = 500;
+        //         this.editor.updateConnectionNodes(this.selectedNode.id);
+        //     }           
+        // });
         
         this.editor.start();
 
@@ -73,7 +73,10 @@ export class LogicSim {
         pos_y = pos_y * (this.editor.precanvas.clientHeight / (this.editor.precanvas.clientHeight * this.editor.zoom)) - (this.editor.precanvas.getBoundingClientRect().y * (this.editor.precanvas.clientHeight / (this.editor.precanvas.clientHeight * this.editor.zoom)));
   
         switch(name) {
-            case 'input-component-on':
+            case 'not-gate':
+                const componentId = 'not-'+cuid();
+                const notGate = new EditorComponentNotGate(componentId);
+                this.editor.addNode('not-'+cuid(), notGate.inputs, notGate.outputs, pos_x, pos_y, notGate.className, notGate.data, notGate.html, false);
         }
         return false;
     }

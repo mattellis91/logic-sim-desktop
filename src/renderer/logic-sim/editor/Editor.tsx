@@ -6,11 +6,11 @@ import SlidingPanel from "react-sliding-side-panel";
 
 export default function Editor() {
 
-    const [editor, setEditor] = useState<Drawflow>();
+    const [editor, setEditor] = useState<LogicSim>();
     const [openPanel, setOpenPanel] = useState<boolean>(false);
 
     useEffect(() => {
-        setEditor(new LogicSim('drawflow').getEditor());
+        setEditor(new LogicSim('drawflow'));
     }, []);
     
     return (

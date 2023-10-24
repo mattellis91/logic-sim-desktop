@@ -1,8 +1,9 @@
 import Drawflow from "drawflow";
 import { useState } from "react";
+import { LogicSim } from "../logic-sim";
 
 type DockProps = {
-    editor: Drawflow | undefined;
+    editor: LogicSim | undefined;
 }
 
 export default function Dock({ editor }: DockProps) {
@@ -126,6 +127,7 @@ export default function Dock({ editor }: DockProps) {
             console.log('draggedItem dropped')
             console.log(draggedItem);
         }
+        editor?.addComponent('not-gate', e.clientX, e.clientY);
     }
     
     return (
