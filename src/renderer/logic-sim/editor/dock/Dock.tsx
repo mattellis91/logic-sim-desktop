@@ -35,7 +35,7 @@ export default function Dock({ editor }: DockProps) {
         {
             content: '!',
             id: 'not-gate',
-            type: 'note-gate',
+            type: 'not-gate',
             tooltip: 'Not Gate',
             draggable: true,
         },
@@ -123,11 +123,11 @@ export default function Dock({ editor }: DockProps) {
         e.stopPropagation();
         e.preventDefault();
         console.log(e);
-        if (draggedItem !== null) {
-            console.log('draggedItem dropped')
-            console.log(draggedItem);
+        const componentId = e.target.attributes.getNamedItem('data-component-id')?.value;
+        if(componentId && editor) {
+            console.log(componentId);
+            editor?.addComponent(componentId, e.clientX, e.clientY);
         }
-        editor?.addComponent('not-gate', e.clientX, e.clientY);
     }
     
     return (

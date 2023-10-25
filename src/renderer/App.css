@@ -502,7 +502,7 @@ btn-lock {
   bottom: 20px;
   border-radius: 15px;
   background-color: black;
-  min-width: 100px;
+  min-width: 30%;
 }
 
 .dock .dock-element {
