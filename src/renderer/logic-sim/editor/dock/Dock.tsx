@@ -21,7 +21,7 @@ export default function Dock({ editor }: DockProps) {
         {
             content: 'i',
             id: 'variable-input',
-            type: 'input-component-variable',
+            type: 'input-component-on',
             tooltip: 'Variable Input',
             draggable: true,
         },
