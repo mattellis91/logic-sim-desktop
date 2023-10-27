@@ -3,6 +3,7 @@ import Dock from "./dock/Dock";
 import { LogicSim } from "./logic-sim";
 import Drawflow from "drawflow";
 import SlidingPanel from "react-sliding-side-panel";
+import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
 
 export default function Editor() {
 
@@ -15,15 +16,25 @@ export default function Editor() {
     
     return (
         <div id="drawflow-wrapper">
-            <button onClick={() => setOpenPanel(true)}>Open</button>
+            {/* <button onClick={() => setOpenPanel(true)}>Open</button> */}
+            <Sidebar>
+            <Menu>
+                <SubMenu label="Charts">
+                <MenuItem> Pie charts </MenuItem>
+                <MenuItem> Line charts </MenuItem>
+                </SubMenu>
+                <MenuItem> Documentation </MenuItem>
+                <MenuItem> Calendar </MenuItem>
+            </Menu>
+            </Sidebar>;
             <div id="drawflow" />
-            <Dock editor={editor} />
+            {/* <Dock editor={editor} />
             <SlidingPanel type={'right'} isOpen={openPanel} size={20}>
                 <div>
                     <div>Panel Test</div>
                     <button onClick={() => setOpenPanel(false)}>Close</button>
                 </div>
-            </SlidingPanel>
+            </SlidingPanel> */}
         </div>
     )
 }
