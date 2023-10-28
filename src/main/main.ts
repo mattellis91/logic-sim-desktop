@@ -99,8 +99,10 @@ const createWindow = async () => {
     mainWindow = null;
   });
 
+  mainWindow.setMenu(null);
+
   const menuBuilder = new MenuBuilder(mainWindow);
-  menuBuilder.buildMenu();
+  //menuBuilder.buildMenu();
 
   // Open urls in the user's browser
   mainWindow.webContents.setWindowOpenHandler((edata) => {
