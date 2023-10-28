@@ -65,7 +65,7 @@ export class LogicSim {
 
         const componentId = 'not-'+cuid();
         const notGate = new EditorComponentNotGate(componentId);
-        this.nodeMap[componentId] = this.editor.addNode(componentId, notGate.inputs, notGate.outputs, 100, 100, notGate.className, notGate.data, notGate.html, false);
+        this.nodeMap[componentId] = this.editor.addNode(componentId, notGate.inputs, notGate.outputs, 400, 100, notGate.className, notGate.data, notGate.html, false);
         console.log(this.nodeMap);
     }
 

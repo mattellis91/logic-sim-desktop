@@ -15,26 +15,28 @@ export default function Editor() {
     }, []);
     
     return (
-        <div id="drawflow-wrapper">
-            {/* <button onClick={() => setOpenPanel(true)}>Open</button> */}
-            <Sidebar>
-            <Menu>
-                <SubMenu label="Charts">
-                <MenuItem> Pie charts </MenuItem>
-                <MenuItem> Line charts </MenuItem>
-                </SubMenu>
-                <MenuItem> Documentation </MenuItem>
-                <MenuItem> Calendar </MenuItem>
-            </Menu>
-            </Sidebar>;
-            <div id="drawflow" />
-            {/* <Dock editor={editor} />
-            <SlidingPanel type={'right'} isOpen={openPanel} size={20}>
-                <div>
-                    <div>Panel Test</div>
-                    <button onClick={() => setOpenPanel(false)}>Close</button>
-                </div>
-            </SlidingPanel> */}
+        <div>
+            <Sidebar style={{ position:"absolute", height: "100vh" }}> 
+                <Menu>
+                    <SubMenu label="Charts">
+                    <MenuItem> Pie charts </MenuItem>
+                    <MenuItem> Line charts </MenuItem>
+                    </SubMenu>
+                    <MenuItem> Documentation </MenuItem>
+                    <MenuItem> Calendar </MenuItem>
+                </Menu>
+            </Sidebar>
+            <div id="drawflow-wrapper">
+                {/* <button onClick={() => setOpenPanel(true)}>Open</button> */}
+                <div id="drawflow" />
+                {/* <Dock editor={editor} />
+                <SlidingPanel type={'right'} isOpen={openPanel} size={20}>
+                    <div>
+                        <div>Panel Test</div>
+                        <button onClick={() => setOpenPanel(false)}>Close</button>
+                    </div>
+                </SlidingPanel> */}
+            </div>
         </div>
     )
 }
