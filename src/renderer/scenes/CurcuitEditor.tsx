@@ -20,8 +20,10 @@ const CurcuitEditor = () => {
                     <div id="drawflow"></div>
                 
                 <Box sx={{mr:2, position: 'absolute', right:0, top:0, textAlign:'right', mt:2}}>
-                    <Button sx={{mb:1, display:'block'}} variant='contained'>IO</Button>
+                    <Button sx={{mb:1, display:'block'}} variant='contained'>Input</Button>
+                    <Button sx={{mb:1, display:'block'}} variant='contained'>Output</Button>
                     <Button sx={{mb:1, display:'block'}} variant='contained'>Gates</Button>
+                    <Button sx={{mb:1, display:'block'}} variant='contained'>Custom</Button>
                 </Box>
             </div>
         </Box>

@@ -18,17 +18,6 @@ const Topbar = () => {
 
     return (
         <Box sx={{display:"flex", justifyContent:"space-between", padding:2}}>
-            {/* SEARCH BAR */}
-            <Box sx={{
-                display: 'flex',
-                bgcolor: colors.primary[400],
-                borderRadius: '3px',
-            }}>
-                <InputBase sx={{ml: 2, flex: 1}} placeholder='Search'></InputBase>
-                <IconButton type='button' sx={{p: 1}}>
-                    <SearchIcon />
-                </IconButton>
-            </Box>
             {/* ICONS */}
             <Box sx={{display: 'flex'}}>
                 <IconButton>
@@ -46,6 +35,18 @@ const Topbar = () => {
                     }
                 </IconButton>
             </Box>
+            {/* SEARCH BAR */}
+            <Box sx={{
+                display: 'flex',
+                bgcolor: colors.primary[400],
+                borderRadius: '3px',
+            }}>
+                <InputBase sx={{ml: 2, flex: 1}} placeholder='Search'></InputBase>
+                <IconButton type='button' sx={{p: 1, ml: 2}}>
+                    <SearchIcon />
+                </IconButton>
+            </Box>
+            
         </Box>
     )
 }
