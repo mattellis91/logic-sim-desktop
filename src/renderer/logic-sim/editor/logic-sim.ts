@@ -21,6 +21,7 @@ export class LogicSim {
         const drawflowElement = document.getElementById(drawflowId);
         this.editor = new Drawflow(drawflowElement as HTMLElement);
         this.initEditor();
+        console.log(this.editor);
     }
 
     initEditor() {

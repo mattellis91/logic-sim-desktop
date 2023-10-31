@@ -12,9 +12,7 @@ export default function App() {
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
-        <CssBaseline />
         <div className='app'>
-          <Sidebar />
           <main className='content'>
             <Topbar />
             <Router>

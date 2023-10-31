@@ -17,7 +17,7 @@ const Topbar = () => {
     console.log(theme.palette.mode);
 
     return (
-        <Box display="flex" justifyContent="space-between" p={2}>
+        <Box sx={{display:"flex", justifyContent:"space-between", padding:2}}>
             {/* SEARCH BAR */}
             <Box sx={{
                 display: 'flex',
