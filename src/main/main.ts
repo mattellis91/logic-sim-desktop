@@ -71,8 +71,6 @@ const createWindow = async () => {
 
   mainWindow = new BrowserWindow({
     show: false,
-    width: 1280,
-    height: 720,
     icon: getAssetPath('icon.png'),
     webPreferences: {
       preload: app.isPackaged
@@ -81,6 +79,7 @@ const createWindow = async () => {
     },
   });
 
+  mainWindow.maximize();
   mainWindow.loadURL(resolveHtmlPath('index.html'));
   mainWindow.webContents.openDevTools({ mode: 'detach' });
 
