@@ -12,6 +12,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import StopOutlinedIcon from '@mui/icons-material/StopOutlined';
 import SaveAsOutlinedIcon from '@mui/icons-material/SaveAsOutlined';
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'; 
 
 const Topbar = () => {
     const theme = useTheme();
@@ -42,11 +43,14 @@ const Topbar = () => {
                 <IconButton>
                     <SaveAsOutlinedIcon />
                 </IconButton>
-                <IconButton onClick={colorMode.toggleColorMode}>
+                <IconButton>
+                    <DeleteOutlineOutlinedIcon />
+                </IconButton>
+                {/* <IconButton onClick={colorMode.toggleColorMode}>
                     {theme.palette.mode === 'dark' ? 
                        ( <LightModeOutlinedIcon /> ) : ( <DarkModeOutlinedIcon /> )
                     }
-                </IconButton>
+                </IconButton> */}
             </Box>
             <Box sx={{position:'relative'}}>
                 <span style={{position: 'absolute', bottom: 0, fontWeight: 600}}>Untitled</span>

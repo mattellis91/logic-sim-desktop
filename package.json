@@ -103,7 +103,6 @@
     "@mui/material": "^5.14.15",
     "@react-icons/all-files": "^4.1.0",
     "cuid": "^3.0.0",
-    "drawflow": "^0.0.59",
     "electron-debug": "^3.2.0",
     "electron-log": "^4.4.8",
     "electron-updater": "^6.1.4",

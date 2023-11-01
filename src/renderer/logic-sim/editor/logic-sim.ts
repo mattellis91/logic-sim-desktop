@@ -1,5 +1,5 @@
 import cuid from "cuid";
-import Drawflow from "drawflow";
+import Drawflow from "./lib/drawflow";
 import { EditorComponentNotGate } from "./components/gates/not-gate";
 import { EditorComponentAndGate } from "./components/gates/and-gate";
 import { EditorComponentNandGate } from "./components/gates/nand-gate";
@@ -76,6 +76,38 @@ export class LogicSim {
                 this.options.onEditorClick();
             }
         });
+
+        this.editor.on('connectionCreated', (connection:any) => {
+            console.log('connection created');
+            console.log(connection);
+            let outputNode = this.editor.getNodeFromId(connection.output_id);
+            let inputNode = this.editor.getNodeFromId(connection.input_id);
+            console.log(outputNode);
+            let pathClass, connectionSVG;
+            switch(outputNode.data.type) {
+                case 'and':
+                case 'or':
+                case 'not':
+                case 'xor':
+                case 'xnor':
+                case 'nand':
+                case 'nor':
+                    pathClass = outputNode.data.value ? 'on-path' : 'off-path';
+                    connectionSVG = document.getElementsByClassName('node_in_node-'+connection.input_id+' node_out_node-'+connection.output_id)[0];
+                    connectionSVG.classList.remove('on-path');
+                    connectionSVG.classList.remove('off-path');
+                    connectionSVG.classList.add(pathClass);
+                    break;
+
+                case 'input':
+                    pathClass = outputNode.data.value ? 'on-path' : 'off-path';
+                    connectionSVG = document.getElementsByClassName('node_in_node-'+connection.input_id+' node_out_node-'+connection.output_id)[0];
+                    connectionSVG.classList.remove('on-path');
+                    connectionSVG.classList.remove('off-path');
+                    connectionSVG.classList.add(pathClass);
+                    break;
+            }
+        });
         
         this.editor.start();
 
@@ -94,6 +126,11 @@ export class LogicSim {
         if (this.editor.editor_mode === 'fixed') {
             return false;
         }
+
+        if(!this.editor?.precanvas) {
+            return false;
+        }
+
         pos_x = pos_x * (this.editor.precanvas.clientWidth / (this.editor.precanvas.clientWidth * this.editor.zoom)) - (this.editor.precanvas.getBoundingClientRect().x * (this.editor.precanvas.clientWidth / (this.editor.precanvas.clientWidth * this.editor.zoom)));
         pos_y = pos_y * (this.editor.precanvas.clientHeight / (this.editor.precanvas.clientHeight * this.editor.zoom)) - (this.editor.precanvas.getBoundingClientRect().y * (this.editor.precanvas.clientHeight / (this.editor.precanvas.clientHeight * this.editor.zoom)));
   
@@ -148,7 +185,7 @@ export class LogicSim {
             //INPUTS
             case 'input-component-variable': {
                 componentId = 'inputVar-'+cuid();
-                const inputVariable = new EditorComponentInputVariable(componentId);
+                const inputVariable = new EditorComponentInputVariable(componentId, 'I1');
                 this.editor.addNode('inputVar-'+cuid(), inputVariable.inputs, inputVariable.outputs, pos_x, pos_y, inputVariable.className, inputVariable.data, inputVariable.html, false);
                 break;
             }
