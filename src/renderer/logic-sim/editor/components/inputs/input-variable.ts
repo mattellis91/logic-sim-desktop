@@ -16,6 +16,6 @@ export class EditorComponentInputVariable implements EditorComponent {
     data = {type:"input", value: 1}
     inputs = 0;
     outputs = 1;
-    className = 'input-component-variable';
+    className = 'input-component-variable variable-component';
 
 }

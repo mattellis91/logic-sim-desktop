@@ -7,7 +7,9 @@ export class EditorComponentInputConstantOn implements EditorComponent {
     constructor(id: string) {
         this.id = id;
         this.html = `
-        <div><span>1</span></div>
+        <div>
+            <span>1</span>
+        </div>
         `;
     }
 

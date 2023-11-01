@@ -14,6 +14,6 @@ export class EditorComponentOutput implements EditorComponent {
     data = {type:"output", value: null};
     inputs = 1;
     outputs = 0;
-    className = 'output-component';
+    className = 'output-component variable-component';
 
 }

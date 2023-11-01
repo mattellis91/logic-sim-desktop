@@ -2,12 +2,16 @@ import {Box, IconButton, InputBase, useTheme} from '@mui/material';
 import { useContext } from 'react';
 import { ColorModeContext, tokens } from '../../theme';
 import IputBase from '@mui/material';
-import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
+import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';;
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
-import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
+import PlayArrowOutlinedIcon from '@mui/icons-material/PlayArrowOutlined';
+import PauseOutlinedIcon from '@mui/icons-material/PauseOutlined';
+import PauseIcon from '@mui/icons-material/Pause';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
-import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 import SearchIcon from '@mui/icons-material/Search';
+import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
+import StopOutlinedIcon from '@mui/icons-material/StopOutlined';
+import SaveAsOutlinedIcon from '@mui/icons-material/SaveAsOutlined';
 
 const Topbar = () => {
     const theme = useTheme();
@@ -21,19 +25,31 @@ const Topbar = () => {
             {/* ICONS */}
             <Box sx={{display: 'flex'}}>
                 <IconButton>
-                    <NotificationsOutlinedIcon />
+                    <MenuOutlinedIcon />
                 </IconButton>
                 <IconButton>
                     <SettingsOutlinedIcon />
                 </IconButton>
                 <IconButton>
-                    <PersonOutlinedIcon />
+                    <PlayArrowOutlinedIcon />
+                </IconButton>
+                <IconButton>
+                    <PauseOutlinedIcon />
+                </IconButton>
+                <IconButton>
+                    <StopOutlinedIcon />
+                </IconButton>
+                <IconButton>
+                    <SaveAsOutlinedIcon />
                 </IconButton>
                 <IconButton onClick={colorMode.toggleColorMode}>
                     {theme.palette.mode === 'dark' ? 
                        ( <LightModeOutlinedIcon /> ) : ( <DarkModeOutlinedIcon /> )
                     }
                 </IconButton>
+            </Box>
+            <Box sx={{position:'relative'}}>
+                <span style={{position: 'absolute', bottom: 0, fontWeight: 600}}>Untitled</span>
             </Box>
             {/* SEARCH BAR */}
             <Box sx={{

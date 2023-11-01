@@ -10,15 +10,26 @@ import { EditorComponentXorGate } from "./components/gates/xor-gate";
 import { EditorComponentInputVariable } from "./components/inputs/input-variable";
 import { EditorComponentInputConstantOff } from "./components/inputs/input-constant-off";
 import { EditorComponentInputConstantOn } from "./components/inputs/input-constant-on";
+import { EditorComponentOutput } from "./components/outputs/output";
+import { EditorComponent8BitDisplay } from "./components/outputs/8-bit-display";
+
+interface EditorOptions {
+    onEditorClick?: Function,
+    onComponentAdded?: Function
+    setInputState?: Function,
+}
 
 export class LogicSim {
 
     editor: Drawflow;
     selectedNode: any;
     nodeMap: any = {};
+    selectedComponent: string | null = null;
+    options: EditorOptions;
 
-    constructor(drawflowId:string) {
+    constructor(drawflowId:string, options:EditorOptions = {}) {
         const drawflowElement = document.getElementById(drawflowId);
+        this.options = options;
         this.editor = new Drawflow(drawflowElement as HTMLElement);
         this.initEditor();
         console.log(this.editor);
@@ -50,24 +61,28 @@ export class LogicSim {
         //     console.log(id);
         // });
 
-        // this.editor.on('click', (e:Event) => {
-        //     console.log(e);
-        //     if(e.target && (e.target as HTMLElement).getAttribute('data-component-id') && !this.selectedNode) {
-        //         const dataComponentId = (e.target as HTMLElement).getAttribute('data-component-id');
-        //         console.log("ASDASDASD");
-        //         console.log(dataComponentId);
-        //         this.selectedNode = this.editor.getNodeFromId(this.nodeMap[dataComponentId as string]);
-        //         this.selectedNode.pos_x = 500;
-        //         this.editor.updateConnectionNodes(this.selectedNode.id);
-        //     }           
-        // });
+        this.editor.on('click', (e:Event) => {
+            console.log(e);
+            console.log("Editor clicked!!");
+            console.log('selected comp: ' + this.selectedComponent)     
+            if (this.selectedComponent) {
+                const pos_x = (e as any).x;
+                const pos_y = (e as any).y;
+                console.log(e);
+                this.addComponent(this.selectedComponent, pos_x, pos_y);
+            }
+            this.selectedComponent = null;
+            if(this.options.onEditorClick) {
+                this.options.onEditorClick();
+            }
+        });
         
         this.editor.start();
 
-        const componentId = 'not-'+cuid();
-        const notGate = new EditorComponentNotGate(componentId);
-        this.nodeMap[componentId] = this.editor.addNode(componentId, notGate.inputs, notGate.outputs, 400, 100, notGate.className, notGate.data, notGate.html, false);
-        console.log(this.nodeMap);
+        // const componentId = 'not-'+cuid();
+        // const notGate = new EditorComponentNotGate(componentId);
+        // this.nodeMap[componentId] = this.editor.addNode(componentId, notGate.inputs, notGate.outputs, 400, 100, notGate.className, notGate.data, notGate.html, false);
+        // console.log(this.nodeMap);
     }
 
     getEditor() {
@@ -84,70 +99,98 @@ export class LogicSim {
   
         console.log(name)
 
+        let componentId = '';
+
         switch(name) {
             //GATES
             case 'not-gate': {
-                const componentId = 'not-'+cuid();
+                componentId = 'not-'+cuid();
                 const notGate = new EditorComponentNotGate(componentId);
                 this.editor.addNode('not-'+cuid(), notGate.inputs, notGate.outputs, pos_x, pos_y, notGate.className, notGate.data, notGate.html, false);
                 break;
             }
             case 'and-gate': {
-                const componentId = 'and-'+cuid();
+                componentId = 'and-'+cuid();
                 const andGate = new EditorComponentAndGate(componentId);
                 this.editor.addNode('and-'+cuid(), andGate.inputs, andGate.outputs, pos_x, pos_y, andGate.className, andGate.data, andGate.html, false);
                 break;
             }
             case 'nand-gate': {
-                const componentId = 'nand-'+cuid();
+                componentId = 'nand-'+cuid();
                 const nandGate = new EditorComponentNandGate(componentId);
                 this.editor.addNode('nand-'+cuid(), nandGate.inputs, nandGate.outputs, pos_x, pos_y, nandGate.className, nandGate.data, nandGate.html, false);
                 break;
             }
             case 'or-gate': {
-                const componentId = 'or-'+cuid();
+                componentId = 'or-'+cuid();
                 const orGate = new EditorComponentOrGate(componentId);
                 this.editor.addNode('or-'+cuid(), orGate.inputs, orGate.outputs, pos_x, pos_y, orGate.className, orGate.data, orGate.html, false);
                 break;
             }
             case 'nor-gate': {
-                const componentId = 'nor-'+cuid();
+                componentId = 'nor-'+cuid();
                 const norGate = new EditorComponentNorGate(componentId);
                 this.editor.addNode('nor-'+cuid(), norGate.inputs, norGate.outputs, pos_x, pos_y, norGate.className, norGate.data, norGate.html, false);
                 break;
             }
             case 'xor-gate': {
-                const componentId = 'xor-'+cuid();
+                componentId = 'xor-'+cuid();
                 const xorGate = new EditorComponentXorGate(componentId);
                 this.editor.addNode('xor-'+cuid(), xorGate.inputs, xorGate.outputs, pos_x, pos_y, xorGate.className, xorGate.data, xorGate.html, false);
                 break;
             }
             case 'xnor-gate': {
-                const componentId = 'xnor-'+cuid();
+                componentId = 'xnor-'+cuid();
                 const xnorGate = new EditorComponentXnorGate(componentId);
                 this.editor.addNode('xnor-'+cuid(), xnorGate.inputs, xnorGate.outputs, pos_x, pos_y, xnorGate.className, xnorGate.data, xnorGate.html, false);
                 break;
             }
             //INPUTS
             case 'input-component-variable': {
-                const componentId = 'inputVar-'+cuid();
+                componentId = 'inputVar-'+cuid();
                 const inputVariable = new EditorComponentInputVariable(componentId);
                 this.editor.addNode('inputVar-'+cuid(), inputVariable.inputs, inputVariable.outputs, pos_x, pos_y, inputVariable.className, inputVariable.data, inputVariable.html, false);
                 break;
             }
             case 'input-component-off': {
-                const componentId = 'inputOff-'+cuid();
+                componentId = 'inputOff-'+cuid();
                 const inputOff = new EditorComponentInputConstantOff(componentId);
                 this.editor.addNode('inputOff-'+cuid(), inputOff.inputs, inputOff.outputs, pos_x, pos_y, inputOff.className, inputOff.data, inputOff.html, false);
                 break;
             }
             case 'input-component-on': {
-                const componentId = 'inputOn-'+cuid();
+                componentId = 'inputOn-'+cuid();
                 const inputOn = new EditorComponentInputConstantOn(componentId);
                 this.editor.addNode('inputOn-'+cuid(), inputOn.inputs, inputOn.outputs, pos_x, pos_y, inputOn.className, inputOn.data, inputOn.html, false);
                 break;
             }
+            case 'output-component': {
+                componentId = 'output-'+cuid();
+                const output = new EditorComponentOutput(componentId);
+                this.editor.addNode('output-'+cuid(), output.inputs, output.outputs, pos_x, pos_y, output.className, output.data, output.html, false);
+                break;
+            }
+            case '8-bit-display': {
+                componentId = '8-bit-display-'+cuid();
+                const output = new EditorComponent8BitDisplay(componentId);
+                this.editor.addNode('8-bit-display-'+cuid(), output.inputs, output.outputs, pos_x, pos_y, output.className, output.data, output.html, false);
+                break;
+            }
         }
-        return false;
+        if(this.options.onComponentAdded) {
+            this.options.onComponentAdded({
+                id: componentId,
+                type: name,
+                x: pos_x,
+                y: pos_y,
+                label: '',
+                state: true
+            });
+        }
+        return true;
+    }
+
+    setSelectedComponent(componentName:string) {
+        this.selectedComponent = componentName;
     }
 }

@@ -44,7 +44,7 @@ body,
   height: 100%;
 }
 
-.output-component {
+.variable-component {
   border-radius: 100% !important;
   height: 50px !important;
   width: 50px !important;
